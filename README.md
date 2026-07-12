@@ -1,10 +1,27 @@
 # OmniAvatar Core
 
+[![Go CI][go-ci-svg]][go-ci-url]
+[![Go Lint][go-lint-svg]][go-lint-url]
+[![Go SAST][go-sast-svg]][go-sast-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Docs][docs-mkdoc-svg]][docs-mkdoc-url]
+[![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
+ [go-ci-svg]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/plexusone/omniavatar-core/actions/workflows/go-sast-codeql.yaml
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omniavatar-core
  [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omniavatar-core
+ [docs-mkdoc-svg]: https://img.shields.io/badge/Go-dev%20guide-blue.svg
+ [docs-mkdoc-url]: https://plexusone.dev/omniavatar-core
+ [viz-svg]: https://img.shields.io/badge/Go-visualizaton-blue.svg
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomniavatar-core
+ [loc-svg]: https://tokei.rs/b1/github/plexusone/omniavatar-core
+ [repo-url]: https://github.com/plexusone/omniavatar-core
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/plexusone/omniavatar-core/blob/main/LICENSE
 
