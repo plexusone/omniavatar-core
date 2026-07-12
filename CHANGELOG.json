@@ -1,0 +1,38 @@
+{
+  "irVersion": "1.0",
+  "project": "omniavatar-core",
+  "repository": "https://github.com/plexusone/omniavatar-core",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify", "johncwang@gmail.com"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-07-12",
+      "highlights": [
+        { "description": "Initial release of omniavatar-core interfaces" },
+        { "description": "Provider-agnostic avatar abstraction for real-time AI avatars" },
+        { "description": "Support for HeyGen, Tavus, and bitHuman avatar providers" }
+      ],
+      "added": [
+        { "description": "`avatar.Provider` interface for creating avatar sessions" },
+        { "description": "`avatar.Session` interface for managing avatar lifecycle (Start, WaitForJoin, Close)" },
+        { "description": "`avatar.AudioDestination` interface for streaming TTS audio to avatars" },
+        { "description": "`avatar.SessionConfig` for provider-agnostic session configuration" },
+        { "description": "`avatar.SessionCallbacks` for avatar events (OnAvatarJoined, OnPlaybackStarted, OnPlaybackFinished, OnError)" },
+        { "description": "`avatar.AudioConfig` with DefaultAudioConfig() for 24kHz mono PCM16" },
+        { "description": "`avatar.Metrics` for avatar performance metrics (join latency, playback latency)" },
+        { "description": "`registry.ProviderFactory` type for provider registration" },
+        { "description": "`registry.ProviderConfig` with Extensions map for provider-specific options" },
+        { "description": "`registry.WithAPIKey()`, `WithBaseURL()`, `WithExtension()` option functions" },
+        { "description": "Sentinel errors: `ErrSessionNotStarted`, `ErrSessionAlreadyStarted`, `ErrAvatarJoinTimeout`, `ErrProviderNotFound`" },
+        { "description": "`avatar.ProviderError` for wrapping provider-specific errors" }
+      ],
+      "documentation": [
+        { "description": "README.md with architecture overview, interfaces, and usage examples" },
+        { "description": "Package documentation in doc.go with code examples" },
+        { "description": "Interface documentation with usage patterns" }
+      ]
+    }
+  ]
+}
