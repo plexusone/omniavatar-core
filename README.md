@@ -17,7 +17,7 @@
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omniavatar-core
  [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omniavatar-core
  [docs-mkdoc-svg]: https://img.shields.io/badge/Go-dev%20guide-blue.svg
- [docs-mkdoc-url]: https://plexusone.dev/omniavatar
+ [docs-mkdoc-url]: https://plexusone.dev/omniavatar-core
  [viz-svg]: https://img.shields.io/badge/Go-visualizaton-blue.svg
  [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomniavatar-core
  [loc-svg]: https://tokei.rs/b1/github/plexusone/omniavatar-core

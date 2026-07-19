@@ -1,0 +1,59 @@
+site_name: OmniAvatar Core
+site_description: Provider-agnostic AI avatar interfaces for PlexusOne — real-time sessions and batch video generation, with no provider dependencies
+site_url: https://plexusone.github.io/omniavatar-core
+repo_url: https://github.com/plexusone/omniavatar-core
+repo_name: plexusone/omniavatar-core
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    # Dark mode first (PlexusOne default)
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - https://plexusone.dev/css/plexusone-mkdocs.css
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Interfaces:
+      - Live (Real-Time): live.md
+      - Render (Batch): render.md
+  - Architecture: architecture.md
+  - Releases:
+      - v0.2.0: releases/v0.2.0.md
+      - v0.1.0: releases/v0.1.0.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/plexusone/omniavatar-core

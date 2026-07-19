@@ -29,7 +29,8 @@
         { "description": "Unit tests for the `render` package (`Wait`, state transitions, request validation)" }
       ],
       "documentation": [
-        { "description": "README.md and doc.go updated to document both `live` and `render` surfaces" }
+        { "description": "README.md and doc.go updated to document both `live` and `render` surfaces" },
+        { "description": "MkDocs site added (interfaces reference for both surfaces, architecture, releases) with a `Docs` GitHub Actions workflow deploying via `mkdocs gh-deploy`" }
       ]
     },
     {
