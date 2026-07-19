@@ -7,6 +7,32 @@
   "maintainers": ["grokify", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.2.0",
+      "date": "2026-07-16",
+      "highlights": [
+        { "description": "New `render` package: provider-agnostic batch avatar video generation (submit narration audio, poll, download talking-head MP4)" },
+        { "description": "Package `avatar` renamed to `live` so the real-time and batch surfaces are self-describing" }
+      ],
+      "changed": [
+        { "description": "BREAKING: package `avatar` renamed to `live`; update imports to `github.com/plexusone/omniavatar-core/live` (type and function names unchanged)", "breaking": true },
+        { "description": "BREAKING: `registry.ProviderFactory` renamed to `registry.LiveProviderFactory`", "breaking": true },
+        { "description": "BREAKING: error string prefixes changed from `avatar:` to `live:` and `ProviderError` prefix from `avatar/` to `live/`", "breaking": true }
+      ],
+      "added": [
+        { "description": "`render.Provider` interface with `Generate`, `Status`, and `Download` for asynchronous video generation" },
+        { "description": "`render.AudioUploader` optional capability interface for providers that can host local audio files" },
+        { "description": "`render.GenerateRequest` with `AudioURL` (primary, drives lip-sync from existing narration) and `Script` (secondary, provider TTS) inputs plus provider-specific `Extensions`" },
+        { "description": "`render.Job`, `render.JobState` (with `Terminal()`), and `render.JobStatus` with normalized state plus provider-native `RawStatus`" },
+        { "description": "`render.Wait` polling helper with context cancellation and configurable interval" },
+        { "description": "Render sentinel errors: `ErrAudioUploadUnsupported`, `ErrInvalidRequest`, `ErrJobNotFound`, `ErrJobFailed`, `ErrJobNotCompleted`, `ErrProviderUnavailable`, `ErrProviderAuthFailed`, `ErrInvalidConfig`" },
+        { "description": "`registry.RenderProviderFactory` type for render provider registration" },
+        { "description": "Unit tests for the `render` package (`Wait`, state transitions, request validation)" }
+      ],
+      "documentation": [
+        { "description": "README.md and doc.go updated to document both `live` and `render` surfaces" }
+      ]
+    },
+    {
       "version": "v0.1.0",
       "date": "2026-07-12",
       "highlights": [
