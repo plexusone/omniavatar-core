@@ -1,4 +1,4 @@
-package avatar
+package live
 
 import "context"
 

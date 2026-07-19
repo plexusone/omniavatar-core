@@ -1,7 +1,10 @@
 // Package registry provides types for avatar provider registration and discovery.
 package registry
 
-import "github.com/plexusone/omniavatar-core/avatar"
+import (
+	"github.com/plexusone/omniavatar-core/live"
+	"github.com/plexusone/omniavatar-core/render"
+)
 
 // ProviderConfig holds common configuration options for creating providers.
 type ProviderConfig struct {
@@ -54,8 +57,13 @@ func WithExtension(key string, value any) ProviderOption {
 	}
 }
 
-// ProviderFactory creates a Provider from configuration.
-type ProviderFactory func(config ProviderConfig) (avatar.Provider, error)
+// LiveProviderFactory creates a live (real-time session) Provider from
+// configuration.
+type LiveProviderFactory func(config ProviderConfig) (live.Provider, error)
+
+// RenderProviderFactory creates a render (batch generation) Provider
+// from configuration.
+type RenderProviderFactory func(config ProviderConfig) (render.Provider, error)
 
 // GetString retrieves a string extension value with a default.
 func (c ProviderConfig) GetString(key, defaultValue string) string {

@@ -1,4 +1,4 @@
-package avatar
+package live
 
 import "errors"
 
@@ -6,49 +6,49 @@ import "errors"
 var (
 	// ErrSessionNotStarted indicates that Start() was not called before
 	// attempting an operation that requires an active session.
-	ErrSessionNotStarted = errors.New("avatar: session not started")
+	ErrSessionNotStarted = errors.New("live: session not started")
 
 	// ErrSessionAlreadyStarted indicates that Start() was called on a
 	// session that is already running.
-	ErrSessionAlreadyStarted = errors.New("avatar: session already started")
+	ErrSessionAlreadyStarted = errors.New("live: session already started")
 
 	// ErrAvatarJoinTimeout indicates that the avatar participant did not
 	// join the room within the specified timeout.
-	ErrAvatarJoinTimeout = errors.New("avatar: join timeout")
+	ErrAvatarJoinTimeout = errors.New("live: join timeout")
 
 	// ErrAvatarTrackTimeout indicates that the avatar did not publish
 	// the expected track (video/audio) within the timeout.
-	ErrAvatarTrackTimeout = errors.New("avatar: track publish timeout")
+	ErrAvatarTrackTimeout = errors.New("live: track publish timeout")
 
 	// ErrProviderUnavailable indicates that the avatar provider API
 	// is unreachable or returned an error.
-	ErrProviderUnavailable = errors.New("avatar: provider unavailable")
+	ErrProviderUnavailable = errors.New("live: provider unavailable")
 
 	// ErrProviderAuthFailed indicates that authentication with the
 	// avatar provider failed (invalid API key, etc.).
-	ErrProviderAuthFailed = errors.New("avatar: provider authentication failed")
+	ErrProviderAuthFailed = errors.New("live: provider authentication failed")
 
 	// ErrProviderRateLimited indicates that the avatar provider has
 	// rate-limited the request.
-	ErrProviderRateLimited = errors.New("avatar: provider rate limited")
+	ErrProviderRateLimited = errors.New("live: provider rate limited")
 
 	// ErrInvalidConfig indicates that the avatar configuration is
 	// invalid or incomplete.
-	ErrInvalidConfig = errors.New("avatar: invalid configuration")
+	ErrInvalidConfig = errors.New("live: invalid configuration")
 
 	// ErrRPCTimeout indicates that an RPC call to the avatar timed out.
-	ErrRPCTimeout = errors.New("avatar: RPC timeout")
+	ErrRPCTimeout = errors.New("live: RPC timeout")
 
 	// ErrRPCFailed indicates that an RPC call to the avatar failed.
-	ErrRPCFailed = errors.New("avatar: RPC failed")
+	ErrRPCFailed = errors.New("live: RPC failed")
 
 	// ErrStreamClosed indicates that the audio stream was closed
 	// unexpectedly.
-	ErrStreamClosed = errors.New("avatar: stream closed")
+	ErrStreamClosed = errors.New("live: stream closed")
 
 	// ErrAvatarDisconnected indicates that the avatar participant
 	// disconnected from the room unexpectedly.
-	ErrAvatarDisconnected = errors.New("avatar: disconnected")
+	ErrAvatarDisconnected = errors.New("live: disconnected")
 )
 
 // ProviderError wraps an error from an avatar provider with additional context.
@@ -61,9 +61,9 @@ type ProviderError struct {
 // Error implements the error interface.
 func (e *ProviderError) Error() string {
 	if e.Err != nil {
-		return "avatar/" + e.Provider + ": " + e.Op + ": " + e.Err.Error()
+		return "live/" + e.Provider + ": " + e.Op + ": " + e.Err.Error()
 	}
-	return "avatar/" + e.Provider + ": " + e.Op
+	return "live/" + e.Provider + ": " + e.Op
 }
 
 // Unwrap returns the underlying error.

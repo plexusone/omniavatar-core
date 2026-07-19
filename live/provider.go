@@ -1,4 +1,10 @@
-package avatar
+// Package live provides provider-agnostic interfaces for real-time
+// streaming avatar sessions: create a session, connect it to a room,
+// and stream TTS audio for lip-sync playback.
+//
+// This is the real-time counterpart to package render, which handles
+// asynchronous (batch) avatar video generation.
+package live
 
 // Provider creates avatar sessions.
 //
@@ -16,8 +22,8 @@ package avatar
 //	    return err
 //	}
 //
-//	session, err := provider.CreateSession(avatar.SessionConfig{
-//	    AudioConfig: avatar.DefaultAudioConfig(),
+//	session, err := provider.CreateSession(live.SessionConfig{
+//	    AudioConfig: live.DefaultAudioConfig(),
 //	})
 type Provider interface {
 	// Name returns the provider name (e.g., "heygen", "tavus", "bithuman").
