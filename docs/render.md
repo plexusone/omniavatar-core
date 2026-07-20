@@ -42,6 +42,22 @@ lowest common denominator — all providers consume audio by URL, but only
 some can host it. `render.ErrAudioUploadUnsupported` is available for
 callers that need a typed error.
 
+## AvatarLister (optional capability)
+
+Providers that can enumerate the account's avatars implement this; the
+returned `AvatarInfo.ID` values are directly usable as
+`GenerateRequest.AvatarID`:
+
+```go
+if l, ok := provider.(render.AvatarLister); ok {
+    avatars, err := l.ListAvatars(ctx, "abigail") // case-insensitive substring; "" = all
+}
+```
+
+Useful because a provider's listing endpoint may return different
+identifiers than its generation endpoint accepts (e.g. HeyGen v3 avatar
+groups vs. v2 avatar IDs). Added in v0.3.0.
+
 ## GenerateRequest
 
 Exactly one of `AudioURL` (primary) or `Script` (secondary, provider TTS)
