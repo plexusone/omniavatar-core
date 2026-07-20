@@ -7,6 +7,18 @@
   "maintainers": ["grokify", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-07-19",
+      "highlights": [
+        { "description": "`render.AvatarLister` capability so render providers can enumerate an account's avatars, returning generation-ready IDs" }
+      ],
+      "added": [
+        { "description": "`render.AvatarLister` optional capability interface (with `render.AvatarInfo`) for avatar discovery", "commit": "ea216aa" },
+        { "description": "`render.AudioContentType` helper (audio MIME from filename) for `AudioUploader` implementations", "commit": "af62b87" },
+        { "description": "`render.DownloadURL` helper (stream a URL to a writer) for `Provider.Download` implementations", "commit": "af62b87" }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-07-16",
       "highlights": [
