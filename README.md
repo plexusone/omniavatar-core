@@ -34,8 +34,13 @@ For a batteries-included package with all providers, see [omniavatar](https://gi
 
 ## Architecture
 
+Adapters follow the PlexusOne convention: **render** adapters live in each
+provider SDK repo (depending only on this module), while **live** adapters
+live in the batteries-included `omniavatar` package (their LiveKit
+integration lives there).
+
 ```
-omniavatar-core/              # Core interfaces (no provider deps)
+omniavatar-core/              # Core interfaces + shared helpers (no provider deps)
 ├── live/                     # Real-time sessions
 │   ├── provider.go           # Provider interface
 │   ├── session.go            # Session interface + callbacks
@@ -43,20 +48,26 @@ omniavatar-core/              # Core interfaces (no provider deps)
 │   └── errors.go             # Error types
 ├── render/                   # Batch video generation
 │   ├── provider.go           # Provider + AudioUploader interfaces
+│   ├── lister.go             # AvatarLister + AvatarInfo
 │   ├── request.go            # GenerateRequest
 │   ├── job.go                # Job, JobState, JobStatus, Wait
+│   ├── mediatype.go / download.go  # AudioContentType / DownloadURL helpers
 │   └── errors.go             # Error types
 └── registry/
     └── registry.go           # Factory types + options
 
-omniavatar/                   # Provider implementations
+heygen-go/omniavatar/         # HeyGen RENDER adapter (core-only) — in the SDK repo
+tavus-go/omniavatar/          # Tavus RENDER adapter
+bithuman-go/omniavatar/       # bitHuman RENDER adapter
+
+omniavatar/                   # Batteries-included
 ├── registry.go               # Global live + render registries
-├── providers/
-│   ├── heygen/               # HeyGen (live + render)
-│   ├── tavus/                # Tavus (live + render)
-│   ├── bithuman/             # bitHuman (live + render)
-│   └── all/                  # Convenience import
-└── go.mod
+├── token.go / start_options.go  # LiveKit token + start options
+└── providers/
+    ├── heygen/               # HeyGen LIVE adapter; registers the SDK render adapter
+    ├── tavus/                # Tavus LIVE adapter
+    ├── bithuman/             # bitHuman LIVE adapter
+    └── all/                  # Convenience import
 ```
 
 ## Live Interfaces
@@ -128,6 +139,17 @@ if up, ok := provider.(render.AudioUploader); ok {
 }
 ```
 
+### AvatarLister (optional capability)
+
+Providers that can enumerate the account's avatars implement this; the
+returned `AvatarInfo.ID` values are directly usable as `AvatarID`:
+
+```go
+if l, ok := provider.(render.AvatarLister); ok {
+    avatars, err := l.ListAvatars(ctx, "abigail") // "" = all
+}
+```
+
 ### GenerateRequest
 
 ```go
@@ -192,13 +214,17 @@ Higher priority providers override lower priority registrations for the same nam
 
 ### Registration via init()
 
-Provider packages use `init()` to auto-register when imported:
+The batteries `omniavatar` package registers providers by name via
+`init()`. The render provider is the SDK-hosted adapter; the live provider
+is local:
 
 ```go
 // In omniavatar/providers/heygen/register.go
+import heygenrender "github.com/plexusone/heygen-go/omniavatar"
+
 func init() {
     omniavatar.RegisterLiveProvider("heygen", NewProviderFromConfig, omniavatar.PriorityThick)
-    omniavatar.RegisterRenderProvider("heygen", NewRenderProviderFromConfig, omniavatar.PriorityThick)
+    omniavatar.RegisterRenderProvider("heygen", heygenrender.NewRenderProviderFromConfig, omniavatar.PriorityThick)
 }
 ```
 

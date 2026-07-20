@@ -106,6 +106,16 @@ if errors.Is(err, render.ErrJobFailed) {
 }
 ```
 
+## Adapter Helpers
+
+Small stdlib-only helpers for building render adapters (used by the
+SDK-hosted adapters, so they don't duplicate them):
+
+- `render.AudioContentType(filename)` — audio MIME type from a filename,
+  for `AudioUploader` implementations
+- `render.DownloadURL(ctx, client, url, dst)` — stream a URL to an
+  `io.Writer`, for `Provider.Download` implementations
+
 ## Job Lifecycle
 
 ```

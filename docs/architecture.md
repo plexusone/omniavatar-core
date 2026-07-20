@@ -1,19 +1,22 @@
 # Architecture
 
-`omniavatar-core` is the interfaces-only half of a two-module design,
+`omniavatar-core` is the interfaces-only core of a multi-module design,
 following the same pattern as
 [OmniVoice](https://github.com/plexusone/omnivoice-core).
 
-## Core vs. Batteries-Included
+## Where adapters live
 
 | Module | Contents |
 |--------|----------|
-| **omniavatar-core** (this module) | Interfaces only (`live`, `render`, `registry`) — no provider dependencies |
-| [omniavatar](https://github.com/plexusone/omniavatar) | Provider implementations (HeyGen, Tavus, bitHuman) with auto-registration; pulls in provider SDKs and LiveKit |
+| **omniavatar-core** (this module) | Interfaces (`live`, `render`, `registry`) + small stdlib-only render helpers — no provider dependencies |
+| `heygen-go/omniavatar`, `tavus-go/omniavatar`, `bithuman-go/omniavatar` | **Render** adapters, hosted in each provider SDK repo, depending only on `omniavatar-core`, so provider-specific knowledge stays with the SDK |
+| [omniavatar](https://github.com/plexusone/omniavatar) | Batteries-included: the **live** (LiveKit-coupled) adapters, the registries, and `providers/all` which registers every provider |
 
-Depend on `omniavatar-core` when you consume avatars behind an interface
-and want a minimal dependency footprint; depend on `omniavatar` when you
-construct providers.
+Render adapters live in the provider SDK repos (the PlexusOne convention);
+live adapters live in the batteries package because their LiveKit
+integration does. Depend on `omniavatar-core` when you consume avatars
+behind an interface; depend on `omniavatar` (or a specific
+`<sdk>/omniavatar` render adapter) when you construct providers.
 
 ```
 omniavatar-core/              # Core interfaces (no provider deps)
@@ -53,8 +56,10 @@ type LiveProviderFactory   func(config ProviderConfig) (live.Provider, error)
 type RenderProviderFactory func(config ProviderConfig) (render.Provider, error)
 ```
 
-Providers self-register both surfaces via `init()` in the `omniavatar`
-module, with thin/thick priority so alternative implementations can
+The batteries `omniavatar` package wires these up: each
+`providers/<name>` registers its local **live** adapter and the SDK-hosted
+**render** adapter (constructor-based, `<sdk>/omniavatar.NewRenderProviderFromConfig`)
+via `init()`, with thin/thick priority so alternative implementations can
 coexist. See the
 [omniavatar Architecture guide](https://plexusone.dev/omniavatar/guides/architecture/)
 for the full registry and capability-interface patterns.
